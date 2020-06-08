@@ -4,7 +4,7 @@ import {} from "react-bootstrap"
 import Navigator from "./component/Navigator";
 import { createBrowserHistory } from "history";
 import Login from "./page/Login";
-import Home from './page/Home';
+import Home from './page/HomeLeftRight';
 import Upload from './page/Upload';
 import Export from "./page/Export";
 import { isAdmin } from './Firebase';

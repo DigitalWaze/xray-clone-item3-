@@ -18,8 +18,8 @@ export default class Export extends React.Component{
             loading:true
         }
 
-        this.csvTitle = "User ID,X-ray Name,Date Completed,Right Lateral,Right Medial,Left Medial,Left Lateral,X-ray Error,Notes";
-        this.fileTitle = "xray-evaluation";
+        this.csvTitle = "User ID,X-ray Name,Date Completed,Pelvis Right Zone 1,Pelvis Right Zone 2,Pelvis Right Zone 3,Pelvis Left Zone 1,Pelvis Left Zone 2,Pelvis Left Zone 3,X-ray Error,Notes,Side,Lateral Zone 1,Lateral Zone 2,Lateral Zone 3,X-ray Error,Notes";
+        this.fileTitle = "hips-xray-evaluation";
         this.csv=[];
     }
     ExportToCSV = ()=>{
@@ -47,17 +47,99 @@ export default class Export extends React.Component{
         var result = await getAllEvaluated();
         this.csv=[];
         for(var i=0;i<result.length;i++){
-            this.csv.push(
+
+            if(result[i].Hip==true)
+            {
+                let Rzone1= rates[result[i].RightHipImage.zone1] || "";
+                let Rzone2= rates[result[i].RightHipImage.zone2] || "";
+                let Rzone3= rates[result[i].RightHipImage.zone3] || "";
+
+                let Lzone1= rates[result[i].LeftHipImage.zone1] || "";
+                let Lzone2= rates[result[i].LeftHipImage.zone2] || "";
+                let Lzone3= rates[result[i].LeftHipImage.zone3] || "";
+
+                console.log("Hips")
+                this.csv.push(
                 (result[i].userName || result[i].evaluator) +"," +
-                result[i].imageName +","+
+                result[i].HipImage.ImageName +","+
                 (new Date(result[i].evaluatedOn)).toLocaleDateString() +","+
-                rates[result[i].rightLateral] +","+
-                rates[result[i].rightMedial] +","+
-                rates[result[i].leftMedial] +","+
-                rates[result[i].leftLateral] +","+
+                Rzone1 +","+
+                Rzone2 +","+
+                Rzone3 +","+
+                Lzone1 +","+
+                Lzone2 +","+
+                Lzone3 +","+
                 (result[i].isError ? "Error":"") +","+
                 result[i].comment
                 );
+            }
+
+            if(result[i].RightFrog===true)
+            {
+                console.log("Right")
+
+                let zone1= rates[result[i].RightFrogImage.zone1] || "";
+                let zone2= rates[result[i].RightFrogImage.zone2] || "";
+                let zone3= rates[result[i].RightFrogImage.zone3] || "";
+
+                this.csv.push(
+                (result[i].userName || result[i].evaluator) +"," +
+                result[i].RightFrogImage.ImageName +","+
+                (new Date(result[i].evaluatedOn)).toLocaleDateString() +","+
+
+                " " +","+
+                " " +","+
+                " " +","+
+                " " +","+
+                " " +","+
+                " " +","+
+                (result[i].isError ? "Error":"") +","+
+                result[i].comment+","+
+                "Right"+","+
+                zone1+","+
+                zone2+","+
+                zone3|| " " 
+                );
+            }
+
+            if(result[i].LeftFrog===true)
+            {
+                console.log("Left")
+
+                let zone1= rates[result[i].LeftFrogImage.zone1] || "";
+                let zone2= rates[result[i].LeftFrogImage.zone2] || "";
+                let zone3= rates[result[i].LeftFrogImage.zone3] || "";
+                
+                this.csv.push(
+                (result[i].userName || result[i].evaluator) +"," +
+                result[i].LeftFrogImage.ImageName +","+
+                (new Date(result[i].evaluatedOn)).toLocaleDateString() +","+
+
+                " " +","+
+                " " +","+
+                " " +","+
+                " " +","+
+                " " +","+
+                " " +","+
+                (result[i].isError ? "Error":"") +","+
+                result[i].comment+","+
+                "Left"+","+
+                zone1 +","+
+                zone2 +","+
+                zone3 
+                );
+            }
+            // this.csv.push(
+            //     (result[i].userName || result[i].evaluator) +"," +
+            //     result[i].imageName +","+
+            //     (new Date(result[i].evaluatedOn)).toLocaleDateString() +","+
+            //     rates[result[i].rightLateral] +","+
+            //     rates[result[i].rightMedial] +","+
+            //     rates[result[i].leftMedial] +","+
+            //     rates[result[i].leftLateral] +","+
+            //     (result[i].isError ? "Error":"") +","+
+            //     result[i].comment
+            //     );
         }     
 
         this.ExportToCSV();

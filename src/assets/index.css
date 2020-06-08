@@ -2,7 +2,10 @@
 /* ==========================================================================
    normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css 
    ========================================================================== */
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:none}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:none}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
 
 /* ==========================================================================
    Start of base Webflow CSS - If you're looking for some ultra-clean CSS, skip the boilerplate and see the unminified code below.
@@ -570,6 +573,7 @@
      -webkit-align-items: stretch;
      -ms-flex-align: stretch;
      align-items: stretch;
+ 
    }
    
    .image-3 {
@@ -1315,7 +1319,7 @@
      top: auto;
      right: 0%;
      bottom: 0%;
-     margin-right: 50px;
+     margin-right: 10px;
      margin-bottom: 50px;
      border-style: solid;
      border-width: 1px;
@@ -1352,7 +1356,7 @@
      top: auto;
      right: 0%;
      bottom: 0%;
-     width: 135px;
+     width: 125px;
      min-width: auto;
      margin-top: 0px;
      margin-right: 0px;
@@ -1534,14 +1538,81 @@
    .tablet {
      position: relative;
      z-index: 99999;
-     width: 90%;
-     margin-top: 5px;
-     margin-right: auto;
-     margin-left: auto;
-     border-style: none none none solid;
+     width: 100%;
+     margin-top: 20px;
+     /* margin-right: auto;
+     margin-left: auto; */
+     border-style: none none none none;
      border-width: 2px;
      border-color: #fff;
+     width:calc(100% - 100px);
+     margin-left: 100px;
    }
+
+   .zone-image-div
+   {
+    width:25%;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-left: 1%;
+    margin-bottom: 50px;
+   }
+
+   .table-wrapper
+   {
+     position: absolute;
+     bottom: 20px;
+     display: block;
+   }
+
+   .xray-wrapper
+   {
+    display: block;
+    height: 280px;
+    /* background: green; */
+   }
+
+   .xray-image-wrapper
+   {
+    width:48%;
+    margin-right:2%;
+    display: inline-block;
+    height: 100%;
+   }
+
+
+   @media only screen and (min-height:680px)
+   {
+    .xray-wrapper
+    {
+      height: calc(100vh - 390px);
+    }
+    
+   }
+
+
+   /* @media only screen and (max-height:690px)
+   {
+     .tablet
+     {
+        width:calc(100% - 100px);
+        margin-left: 100px;
+     }
+
+     .zone-image-div
+     {
+      margin-bottom: 50px;
+     }
+   } */
+
+   /* @media only screen and (min-height:690px) and (max-width: 1450px)
+   {
+     
+   .table-wrapper
+   {
+    bottom: 65px;
+   }
+   } */
    
    .grid-2 {
      grid-auto-flow: row;
@@ -1555,7 +1626,7 @@
    
    .table-text {
      /* width: 100%; */
-     margin-bottom: 0px;
+     margin-bottom: 0px !important;
      border-bottom: 1px solid #fff;
      font-size: 20px;
      text-align: right;
@@ -1563,7 +1634,7 @@
    
    .table-text.c {
      border-bottom-style: none;
-     line-height: 20px;
+     line-height: 21px;
      text-align: center;
    }
    
@@ -2691,7 +2762,7 @@
 
   .img-full-size{
     width:100%;
-    height: 100%;
+    height: 10%;
     position: fixed;
     opacity: 1;    
     overflow:auto
@@ -2714,29 +2785,65 @@
     height: auto;
   }
 
+  /* .border-wrapper
+  {
+    border:15px solid white;
+  } */
+
   .zoom-pan figure {
-    max-width: 100%;
-    max-height:53vh;
-    background-repeat: no-repeat;
+   
+    max-height:calc(100%) !important;
+    max-width: calc(100%) !important;
+    width:auto;
+    height:auto;
+    /* max-width: 100%;
+    max-height: 320px; */
+  /* transform: translate(40px,100px);
+    /* height:10vh; */
+
   }
   
-  .zoom-pan figure:hover img {
+  .zoom-pan figure:hover  img{
+
     opacity: 0;
+
+    /* width:10% */
+    /* width: 400px;
+    height: 100px;*/
+  }
+  .zoom-pan figure:hover
+  {
+    transform: scale(1); 
+    background-size: 250% 250%;
+
   }
   
   .zoom-pan img {
+   
     display: block;    
     pointer-events: none;
-    max-width: 100%;
-    max-height:53vh;
+    width:auto;
+    height:auto;
+    max-height:260px;
+    max-width:calc(100%);
+    /* max-width: 100%;
+    max-height:244px !important; */
+  }
+
+  @media only screen and (min-height:680px)
+  {
+    .zoom-pan img
+   {
+     max-height: calc(100vh - 390px);
+   }
+   
   }
   
   .zoom-pan {
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; */
-    /* width: 100%; */
   }
   
   .csv-reader-input {
