@@ -120,7 +120,7 @@ export default class Upload extends Component {
 
                 let refnum = parseInt(file.name);
                 console.log(refnum)
-                UniImagesObject[refnum]={RefNum:refnum,HipImage:{},userName:"Not Evaluated",LeftHipImage:{},RightHipImage:{},LeftFrogImage:{},RightFrogImage:{},Hip:false,LeftFrog:false,RightFrog:false,createdOn: (new Date()).toJSON(),backImage:"",nextImage:"",isEvaluated:false, evaluator: "",status: 1 ,leftStatus:1,rightStatus:1,isError:'',comment:''};
+                UniImagesObject[refnum]={RefNum:refnum,HipImage:{},leftNotes:'',rightNotes:'',userName:"Not Evaluated",LeftHipImage:{},RightHipImage:{},LeftFrogImage:{},RightFrogImage:{},Hip:false,LeftFrog:false,RightFrog:false,createdOn: (new Date()).toJSON(),backImage:"",nextImage:"",isEvaluated:false, evaluator: "",status: 1 ,leftStatus:1,rightStatus:1,isError:'',comment:''};
                 console.log(UniImagesObject);
                
                 

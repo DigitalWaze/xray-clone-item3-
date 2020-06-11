@@ -57,8 +57,33 @@ export default class Export extends React.Component{
                 let Lzone1= rates[result[i].LeftHipImage.zone1] || "";
                 let Lzone2= rates[result[i].LeftHipImage.zone2] || "";
                 let Lzone3= rates[result[i].LeftHipImage.zone3] || "";
+                let rightNotes = result[i].rightNotes;
+                let leftNotes = result[i].leftNotes;
+                let notes='Right Hip: '+(rightNotes || "")+' Left Hip: '+(leftNotes||"");
+                // let newLine1=""
+                // if(notes[0])
+                // {
+                //     newLine1 = 'Right Hip: '+notes[0];
+                // }
+                // console.log(newLine1)
+                // let newLine3=""
+                // if(notes[2])
+                // {
+                //     newLine3 = 'Left Hip: '+notes[2];
+                // }
+                
+                
+                // let newNotes=newLine1;
+                // for(let j=1;j<notes.length;j++)
+                // {
+                //     if(j==2)
+                //     {
+                //         newNotes=newNotes+ " " + newLine3;
+                //     }
+                //     else newNotes=newNotes+ " " +notes[j];
+                // }
 
-                console.log("Hips")
+
                 this.csv.push(
                 (result[i].userName || result[i].evaluator) +"," +
                 result[i].HipImage.ImageName +","+
@@ -70,7 +95,7 @@ export default class Export extends React.Component{
                 Lzone2 +","+
                 Lzone3 +","+
                 (result[i].isError ? "Error":"") +","+
-                result[i].comment
+                notes
                 );
             }
 
@@ -81,7 +106,8 @@ export default class Export extends React.Component{
                 let zone1= rates[result[i].RightFrogImage.zone1] || "";
                 let zone2= rates[result[i].RightFrogImage.zone2] || "";
                 let zone3= rates[result[i].RightFrogImage.zone3] || "";
-
+            
+                console.log(result[i].RightFrogImage.comment)
                 this.csv.push(
                 (result[i].userName || result[i].evaluator) +"," +
                 result[i].RightFrogImage.ImageName +","+
@@ -94,11 +120,14 @@ export default class Export extends React.Component{
                 " " +","+
                 " " +","+
                 (result[i].isError ? "Error":"") +","+
-                result[i].comment+","+
+                // result[i].comment+","+
+                " " +","+   //notes line
                 "Right"+","+
                 zone1+","+
                 zone2+","+
-                zone3|| " " 
+                (zone3 || "")+","+
+                " " +","+
+                (result[i].RightFrogImage.comment|| "")
                 );
             }
 
@@ -122,11 +151,13 @@ export default class Export extends React.Component{
                 " " +","+
                 " " +","+
                 (result[i].isError ? "Error":"") +","+
-                result[i].comment+","+
+                " " +","+
                 "Left"+","+
                 zone1 +","+
                 zone2 +","+
-                zone3 
+                zone3 +","+
+                " "+","+
+                (result[i].LeftFrogImage.comment || "")
                 );
             }
             // this.csv.push(

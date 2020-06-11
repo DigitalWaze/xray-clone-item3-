@@ -331,11 +331,11 @@ class RightXrays extends Component {
             <a className="button-confirm w-button" onClick={this.prevImage} style={{position:"fixed", left:50, bottom:20}}>Previous Patient</a>
             <a className="button-confirm w-button" onClick={this.nextImage} style={{position:"fixed", left:"auto", right:50, bottom:20,fontWeight:'bold'}}> Evaluate Left Hip </a >
 
-            <Note show={this.state.addNote} notes={this.state.EvalType==="Hip"?xray.value.comment:this.state.EvalType==="Lateral"?xray.value.RightFrogImage.comment:''} onSubmit={(value)=>{
+            <Note show={this.state.addNote} EvalType={this.state.EvalType==="Hip"?this.state.EvalType:'Right Lateral Hip'} notes={this.state.EvalType==="Hip"?[xray.value.rightNotes,xray.value.leftNotes]:this.state.EvalType==="Lateral"?xray.value.RightFrogImage.comment:''} onSubmit={(value)=>{
                 if(this.state.EvalType==="Hip")
                 {
-                    xray.value.comment = value;
-                    console.log('here')
+                    xray.value.rightNotes= value[0];
+                    xray.value.leftNotes = value[1];
                 }
                 else if(this.state.EvalType==="Lateral")
                 {
