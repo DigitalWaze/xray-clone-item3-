@@ -202,7 +202,7 @@ class Home extends Component {
         if(xray==null || xray.value==null){
             return (
                 <section>
-                     {this.props.isAdmin && (
+                    {this.props.isAdmin && (
                     <button className="button-confirm w-button" onClick={()=>{
                         this.props.history.push("/Manage");
                     }} style={{position:"fixed", top:20, right:50, left:"auto", bottom:"auto"}}> Upload</button>)}

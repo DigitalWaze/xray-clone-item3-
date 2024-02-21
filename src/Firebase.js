@@ -11,7 +11,10 @@ const firebaseConfig = {
     appId: "1:896539207861:web:a040589437b2e4009136fc"
   };
 let uid= "qMeHOBHKItZVKq7w8nLf6MuIrFh1";
+let uid2= "rW0WKjLa7Ygog0ggEhRfTVpHhXy1";
 
+
+const baseUrl = "https://xray-backend.codingtier.com"
 
 
 // Initialize Firebase
@@ -21,7 +24,35 @@ var storage = firebase.storage();
 export function currentUser(){
     return JSON.parse(localStorage.getItem("userInfo"));
 }
-async function UploadImage(img) {
+
+async function UploadImage(img)
+{    
+    
+    const data = new FormData();
+    data.append('file_name', img.name);
+    data.append('file', img);
+
+    try {
+        const response = await fetch(baseUrl + '/xray-eval-3/image', {
+          method: 'POST',
+          body: data
+        })
+
+        let {url, STORAGE_TYPE_ID} = response;
+
+        let imageUrl = url
+        return {imageUrl, STORAGE_TYPE_ID}         
+        // Handle response
+      } catch (error) {
+        console.error('Error occurred:', error);
+        throw error;
+
+    }
+
+    
+    
+}
+async function UploadImageFirebase(img) {
     var imageUrl =null, key= null;
     let storageRef = firebase.storage().ref().child(`xray/${img.name}`);
     await storageRef.getMetadata().then(response =>{
@@ -30,17 +61,21 @@ async function UploadImage(img) {
         throw e;
     }).catch(err =>{
         if(err.name==="ALREADY_EXISTS"){
+            console.log("errr in upload")
             throw err;
         }
         return storageRef.put(img)        
     }).then((snapshot) => {
+        console.log("snap")
         return snapshot.ref.getDownloadURL();
     }).then((sanpUrl) => {
+        console.log("sanpUrl",sanpUrl)
+
             //url yahan se milega sanpurl
             imageUrl = sanpUrl;
 
     });
- return {imageUrl, key};
+    return {imageUrl, key};
 }
 
 export function uploadObject(ImageObject)
@@ -135,7 +170,7 @@ export async function IsStill(){
 }
 
 export function isAdmin(userId){
-    return userId===uid;
+    return userId===uid || userId===uid2;
 }
 function Logout(){
     firebase.auth().signOut().then(()=>{
@@ -341,7 +376,6 @@ export async function setPelvisDefaults (refnum, leftZone1, leftZone2, leftZone3
                 zone2:rightZone2,
                 zone3:rightZone3
             }
-            
         });
     }).then(response =>{
         if(response){
