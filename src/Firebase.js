@@ -196,15 +196,17 @@ async function getNewImage(currentImage) {
   let data = null;
   await firebase
     .database()
-    .ref()
-    .child("evaluation")
+    .ref("/evaluation")
     .orderByChild("status")
-    .equalTo(1)
+    .equalTo("1")
     .limitToFirst(1)
-    .once("value", (response) => {
-      response.forEach((i) => {
+    .once("value")
+    .then((snapshot) => {
+      snapshot.forEach((i) => {
         data = { key: i.key, value: i.val() };
       });
+
+      console.log("data", data);
 
       if (data != null) {
         // console.log('chala');
@@ -254,35 +256,36 @@ export async function getMyImage(imageKey) {
     await firebase
       .database()
       .ref(`/evaluation/${imageKey}`)
-      .once("value", async (response) => {
-        response.forEach((i) => {
-          data = { key: i.key, value: i.val() };
-        });
+      .once("value")
+      .then(async (snapshot) => {
+        data = { key: snapshot.key, value: snapshot.val() };
+        // snapshot.forEach((i) => {
+        //   data = { key: i.key, value: i.val() };
+        // });
 
         console.log("data", data);
 
-        if (data.value.evaluator?.toString() !== userId) {
+        if (data && data.value?.evaluator?.toString() !== userId) {
           data = await getMyImage();
           return data;
         }
       });
     return data;
   } else {
+    let userState = null;
     await firebase
       .database()
       .ref(`/inProc/${userId}`)
-      .then((response) => {
-        var key = null;
-        response.forEach((i) => {
-          key = i.val();
-        });
+      .once("value")
+      .then(async (snapshot) => {
+        userState = { key: snapshot.key, value: snapshot.val() };
 
-        console.log("key", key);
+        console.log("useState", userState);
 
-        if (key) {
+        if (userState && userState.value?.evalId) {
           return firebase
             .database()
-            .ref(`/evaluation/${key.evalId}`)
+            .ref(`/evaluation/${userState.value.evalId}`)
             .once("value");
         }
         return null;
@@ -297,6 +300,9 @@ export async function getMyImage(imageKey) {
 }
 
 export async function saveImage(key, value) {
+  console.log("key", key);
+  console.log("value", value);
+
   var result = null;
   await firebase
     .database()
@@ -566,6 +572,39 @@ export async function setRightFrogDefaults(refnum, zone1, zone2, zone3) {
         result = false;
       }
       result = true;
+    });
+
+  return result;
+}
+
+export async function neutralizeAllImages() {
+  var result = null;
+  await firebase
+    .database()
+    .ref()
+    .child("evaluation/")
+    .orderByChild("status")
+    .once("value")
+    .then((snapshot) => {
+      let all = [];
+      snapshot.forEach((a) => {
+        all.push({ key: a.key, val: a.val() });
+      });
+      all.forEach(async (i) => {
+        let a = i.key;
+        await firebase.database().ref(`/evaluation/${a}`).update({
+          evaluator: "",
+          status: "1",
+          leftStatus: "1",
+          rightStatus: "1",
+          backImage: "",
+          nextImage: "",
+          isEvaluated: false,
+        });
+      });
+    })
+    .then((response) => {
+      console.log(";her");
     });
 
   return result;

@@ -4,6 +4,7 @@ import {
   getImage,
   getNewImage,
   checkIfCompleted,
+  neutralizeAllImages,
 } from "../Firebase";
 import { Loader } from "../component/Loader";
 import RightXrays from "./RightXrays";
@@ -109,12 +110,12 @@ class Home extends Component {
   };
 
   async componentDidMount() {
+    // neutralizeAllImages();
     let oldkey = localStorage.getItem("oldKey") || "";
     let xray = null;
     if (oldkey) {
       xray = await getMyImage(oldkey);
-    } else xray = await getMyImage(oldkey);
-
+    } else xray = await getMyImage();
     if (xray == null || xray.value == null) {
       this.LoadXray(oldkey);
     } else {
@@ -139,7 +140,7 @@ class Home extends Component {
   };
 
   LoadXray = async (oldkey) => {
-    // console.log('old null')
+    console.log("new");
     let xray = await getNewImage(oldkey);
 
     if (xray && xray.value) {
