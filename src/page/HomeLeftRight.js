@@ -110,9 +110,11 @@ class Home extends Component {
 
   async componentDidMount() {
     let oldkey = localStorage.getItem("oldKey") || "";
-    let xray = await getMyImage(oldkey);
+    let xray = null;
+    if (oldkey) {
+      xray = await getMyImage(oldkey);
+    } else xray = await getMyImage(oldkey);
 
-    let view = null;
     if (xray == null || xray.value == null) {
       this.LoadXray(oldkey);
     } else {
