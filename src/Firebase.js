@@ -254,8 +254,12 @@ export async function getMyImage(imageKey) {
     await firebase
       .database()
       .ref(`/evaluation/${imageKey}`)
-      .then(async (snapshot) => {
-        data = { key: snapshot.key, value: snapshot.val() };
+      .once("value", async (response) => {
+        response.forEach((i) => {
+          data = { key: i.key, value: i.val() };
+        });
+
+        console.log("data", data);
 
         if (data.value.evaluator?.toString() !== userId) {
           data = await getMyImage();
