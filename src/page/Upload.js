@@ -60,15 +60,11 @@ export default class Upload extends Component {
         var images=this.state.images||[];
         for(var i=0;i<files.length;i++){
             if (files[i].type==="image/png" || files[i].type==="image/jpg" || files[i].type==="image/jpeg"){
-                console.log('here')
-
                 var reader = new FileReader();
                 let file=files[i]
                 
                 reader.onload = (e) => this.pushImage(e,file,images)
-
-            reader.readAsDataURL(files[i]);
-                
+                reader.readAsDataURL(files[i]);
             }
         }
         
@@ -123,17 +119,12 @@ export default class Upload extends Component {
                 console.log(refnum)
                 UniImagesObject[refnum]={RefNum:refnum,HipImage:{},leftNotes:'',rightNotes:'',userName:"Not Evaluated",LeftHipImage:{},RightHipImage:{},LeftFrogImage:{},RightFrogImage:{},Hip:false,LeftFrog:false,RightFrog:false,createdOn: (new Date()).toJSON(),backImage:"",nextImage:"",isEvaluated:false, evaluator: "",status: 1 ,leftStatus:1,rightStatus:1,isError:'',comment:''};
                 console.log(UniImagesObject);
-               
-                
-                
+
                 for(let j=0;j<afterUpload.length;j++)
                 {
                     if(afterUpload[j].isUploading){
 
                     }
-
-                    
-                    // let ImagesObject=UniImagesObject[refnum];
                     else if(parseInt(afterUpload[j].name)===refnum)
                     {
                         afterUpload[j].isUploading = true;
@@ -217,13 +208,17 @@ export default class Upload extends Component {
 
                         // this.setState({images:afterUpload});
                     }
-                            
+
+                    
+                    // let ImagesObject=UniImagesObject[refnum];
+                    
                 }
                 // this.setState({images:afterUpload});
 
             }
             
         }
+                            
 
 
         for(let k=0;k<removeMe.length;k++)
@@ -414,7 +409,7 @@ console.log(e);
                         <span className="small-title"> &nbsp; to upload CSV</span>
                         {this.state.process && (<span className="small-title">Processing CSV...</span>)}
                         <span style={{float:'right'}}>
-                             <button className="button-confirm w-button" style={{opacity:this.state.upload?'1':'0.5'}} onClick={this.uploadHanlder} >Upload</button>
+                            <button className="button-confirm w-button" style={{opacity:this.state.upload?'1':'0.5'}} onClick={this.uploadHanlder} >Upload</button>
                         </span>
                     </section>)}
                     {this.state.process && (<span className="small-title">Processing CSV...</span>)}

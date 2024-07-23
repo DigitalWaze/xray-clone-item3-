@@ -117,6 +117,7 @@ export default class Zoom extends Component {
   }
 
 
+
   render = () =>
   <div style={{display:'inline-block',width:'100%',height:'calc(100% - 4px)',verticalAlign:'top'}}>
     {/* <div style={{width:'100%',maxHeight:'100%',height:'100%'}}>  */}
