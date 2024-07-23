@@ -153,9 +153,9 @@ class LeftXrays extends Component {
     let xray = this.state.xray;
 
     this.setState({ loading: true });
-    xray.value.leftStatus = 3;
-    if (xray.value.rightStatus == 3) {
-      //xray.value.status = 1;
+    xray.value.leftStatus = "3";
+    if (xray.value.rightStatus?.toString() === "3") {
+      xray.value.status = "3";
     }
     //xray.value.evaluatedOn = new Date().toJSON();
     //xray.value.evaluator = currentUser().uid;

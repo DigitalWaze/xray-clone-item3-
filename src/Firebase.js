@@ -312,11 +312,11 @@ export async function saveImage(key, value) {
         // console.log(error);
         result = false;
       }
-      let userId = currentUser().uid;
-      firebase.database().ref(`/inProc/${userId}`).update({
-        evalId: "",
-        lastImage: key,
-      });
+      // let userId = currentUser().uid;
+      // firebase.database().ref(`/inProc/${userId}`).update({
+      //   evalId: key,
+      //   lastImage: key,
+      // });
 
       result = true;
     });
