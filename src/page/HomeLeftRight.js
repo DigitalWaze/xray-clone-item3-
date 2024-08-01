@@ -124,8 +124,8 @@ class Home extends Component {
   }
 
   setView = (xray) => {
-    console.log("xray.value.rightStatus", xray.value.rightStatus);
-    console.log("xray.value.rightStatus", xray.value.leftStatus);
+    // console.log("xray.value.rightStatus", xray.value.rightStatus);
+    // console.log("xray.value.rightStatus", xray.value.leftStatus);
     let view = null;
 
     if (xray.value.rightStatus?.toString() === "1") {
@@ -140,7 +140,7 @@ class Home extends Component {
   };
 
   LoadXray = async (oldkey) => {
-    console.log("new");
+    // console.log("new");
     let xray = await getNewImage(oldkey);
 
     if (xray && xray.value) {

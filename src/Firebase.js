@@ -348,7 +348,7 @@ export async function getAllEvaluated() {
     .database()
     .ref("/evaluation")
     .orderByChild("status")
-    .equalTo(3)
+    .equalTo("3")
     .once("value", (snapshot) => {
       snapshot.forEach((i) => {
         result.push(i.val());
