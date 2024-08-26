@@ -140,7 +140,7 @@ class Home extends Component {
   };
 
   LoadXray = async (oldkey) => {
-    // console.log("new");
+    console.log("new", oldkey);
     let xray = await getNewImage(oldkey);
 
     if (xray && xray.value) {
@@ -152,7 +152,10 @@ class Home extends Component {
       } else {
         this.setView(xray);
       }
-    } else console.log("No new Xray");
+    } else {
+      console.log("No new Xray");
+      this.setState({ view: null, xray: null, loading: false });
+    }
   };
   render() {
     const xray = this.state.xray;

@@ -95,6 +95,39 @@ export async function DeleteImageObject(key) {
   return;
 }
 
+export async function EmptyEvaluationDB() {
+  await deleteAllImages();
+  await DeleteAllObjectsFirebase("evaluation/");
+  await DeleteAllObjectsFirebase("inProc/");
+}
+
+export async function DeleteAllObjectsFirebase(path) {
+  try {
+    const snapshot = await firebase.database().ref(path).once("value");
+
+    if (!snapshot.exists()) {
+      console.log("No objects found to delete.");
+      return;
+    }
+
+    const deletePromises = [];
+    snapshot.forEach((childSnapshot) => {
+      const key = childSnapshot.key;
+
+      console.log("key", key);
+      const deletePromise = firebase.database().ref(`${path}/${key}`).remove();
+      deletePromises.push(deletePromise);
+    });
+
+    await Promise.all(deletePromises);
+
+    console.log("All objects deleted successfully.");
+  } catch (error) {
+    console.error("Error deleting all objects:", error);
+    throw error;
+  }
+}
+
 export async function DeleteImage(fileName) {
   firebase.storage().ref().child(`xray/${fileName}`).delete();
   return;
@@ -355,6 +388,23 @@ export async function getAllEvaluated() {
       });
     });
   return result;
+}
+
+export async function deleteAllImages() {
+  try {
+    let response = await fetch(baseUrl + "/xray-eval-3/image/deleteAll", {
+      method: "POST",
+    }).then(async (response) => {
+      return response.json();
+    });
+    console.log("response", response);
+
+    return response;
+    // Handle response
+  } catch (error) {
+    console.error("Error occurred:", error);
+    throw error;
+  }
 }
 
 export async function getDefaultRates() {
